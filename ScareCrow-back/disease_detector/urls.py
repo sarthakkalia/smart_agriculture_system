@@ -8,5 +8,4 @@ urlpatterns = [
     path('index2/', index2, name='index2'),
     path('detect_disease/', detect_disease, name='detect_disease'),
     path("ask_question/", ask_question, name="ask_question"),
-
 ]

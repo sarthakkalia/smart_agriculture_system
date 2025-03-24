@@ -22,3 +22,5 @@ scikit-learn
 google-generativeai 
 python-dotenv 
 pillow
+django-cors-headers
+firebase-admin
