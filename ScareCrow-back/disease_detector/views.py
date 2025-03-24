@@ -9,8 +9,6 @@ import numpy as np
 import cv2
 from django.contrib.auth import login
 from django.contrib.auth.models import User
-from .firebase_auth import verify_firebase_token
-from rest_framework.decorators import api_view
 
 def home(request):
     return render(request, 'index.html')
