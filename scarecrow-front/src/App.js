@@ -22,6 +22,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider 
 } from 'firebase/auth';
+import Marketplace from "./Marketplace";
 
 
 const App = () => {
@@ -43,6 +44,7 @@ const App = () => {
   const [showAuth, setShowAuth] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [showMarketplace, setShowMarketplace] = useState(false);
 
   
   const firebaseConfig = {
@@ -64,12 +66,14 @@ const App = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log('Auth state changed:', user);  
+      console.log('Auth state changed:', user);
       setIsLoggedIn(!!user);
       if (user) {
         localStorage.setItem('farmUser', JSON.stringify(user));
       } else {
         localStorage.removeItem('farmUser');
+        setShowMarketplace(false);
+        setShowDiseaseDetection(false);
       }
     });
     return () => unsubscribe();
@@ -191,21 +195,39 @@ const App = () => {
             <span className="logo-gradient">🌱 CropWise</span>
           </div>
           <div className="nav-menu">
-            <button
-              className={`nav-item ${!showDiseaseDetection ? "active" : ""}`}
-              onClick={() => setShowDiseaseDetection(false)}
-            >
-              <span className="nav-icon">🌾</span>
-              Crop Prediction
-            </button>
-            <button
-              className={`nav-item ${showDiseaseDetection ? "active" : ""}`}
-              onClick={() => setShowDiseaseDetection(true)}
-            >
-              <span className="nav-icon">🌿</span>
-              Disease Detection
-            </button>
-          </div>
+              <button
+                className={`nav-item ${!showDiseaseDetection && !showMarketplace ? "active" : ""}`}
+                onClick={() => {
+                  setShowDiseaseDetection(false);
+                  setShowMarketplace(false);
+                }}
+              >
+                <span className="nav-icon">🌾</span>
+                Crop Prediction
+              </button>
+              <button
+                className={`nav-item ${showDiseaseDetection ? "active" : ""}`}
+                onClick={() => {
+                  setShowDiseaseDetection(true);
+                  setShowMarketplace(false);
+                }}
+              >
+                <span className="nav-icon">🌿</span>
+                Disease Detection
+              </button>
+              {isLoggedIn && (
+                <button
+                  className={`nav-item ${showMarketplace ? "active" : ""}`}
+                  onClick={() => {
+                    setShowMarketplace(true);
+                    setShowDiseaseDetection(false);
+                  }}
+                >
+                  <span className="nav-icon">🛒</span>
+                  Marketplace
+                </button>
+              )}
+            </div>
           <div className="nav-actions">
             {isLoggedIn ? (
               <button className="nav-button" onClick={handleLogout}>
@@ -334,6 +356,8 @@ const App = () => {
             </form>
           </div>
         </div>
+      ) : showMarketplace ? (
+        <Marketplace goBack={() => setShowMarketplace(false)} />
       ) : !showDiseaseDetection ? (
         <div className="main-content">
           <section className="hero">

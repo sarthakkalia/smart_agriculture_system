@@ -9,10 +9,11 @@
 
 /* Glassmorphism Effect */
 .glass {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 /* Auth Provider Buttons */
@@ -64,7 +65,46 @@
   padding: 0 1rem;
   font-size: 0.9em;
 }
+/* Marketplace Styles */
+.marketplace-content {
+  padding: 2rem;
+  margin-top: 2rem;
+}
 
+.marketplace-section {
+  margin-bottom: 3rem;
+}
+
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.listing-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.create-listing-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.create-listing-form textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.back-btn {
+  margin-top: 2rem;
+}
 /* Auth Styles */
 .auth-container {
   max-width: 500px;
@@ -112,7 +152,10 @@
 .hero {
   height: 100vh;
   position: relative;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background-image: url('https://www.iisd.org/sites/default/files/styles/og_image/public/2020-06/RS2085_food-agriculture-topic.jpg?itok=cM6jCv9Q'); /* Add your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
 
@@ -121,7 +164,34 @@
   z-index: 2;
   padding: 8rem 2rem;
   text-align: center;
-  color: white;
+  color: black;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Overlay for better readability */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  z-index: 1;
+}
+/* Adjust blur effect */
+.hero-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(2px);
+  z-index: 0;
 }
 
 .hero-title {
@@ -129,14 +199,23 @@
   margin-bottom: 1.5rem;
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #e0e0e0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+/* Update text gradients */
 .gradient-text {
   background: linear-gradient(45deg, #ffeb3b, #4caf50);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
 /* Prediction Grid */
 .prediction-grid {
   display: grid;
@@ -145,6 +224,8 @@
   max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .input-card,
@@ -185,12 +266,12 @@
   margin-top: 1.5rem;
   cursor: pointer;
   transition: transform 0.3s ease;
-  margin-left: 160px; /* Align with input fields */
-  width: calc(100% - 160px); /* Match input width */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .predict-btn:hover {
   transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Result Animation */
@@ -292,7 +373,7 @@
 }
 
 .nav-item {
-  color: white;
+  color: black;
   display: flex;
   align-items: center;
   gap: 0.5rem;
