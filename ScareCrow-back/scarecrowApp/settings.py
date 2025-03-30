@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-b(g=r9spf7-ag=fh2iz%=$jc*#9xu%(!)82_%s*7g_n*_w704q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['smartagriculture.azurewebsites.net', 'localhost']
 
 
 # Application definition
